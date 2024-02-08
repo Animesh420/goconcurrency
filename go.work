@@ -1,0 +1,14 @@
+go 1.21.1
+
+use (
+	./buffered_channel
+	./channel_select
+	./dining_philosopher
+	./final_project
+	./first_example
+	./prod_and_consumer
+	./second_example
+	./second_video_complex
+	./simple_channels
+	./sleeping-barber
+)

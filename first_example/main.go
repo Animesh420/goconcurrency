@@ -1,0 +1,44 @@
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+func printSomething(wg *sync.WaitGroup, s string) {
+	defer wg.Done()
+	fmt.Println(s)
+}
+
+func poorWaitGroupExample() {
+	var wg sync.WaitGroup
+	words := []string{
+		"alpha", "beta", "gamma",
+		"delta", "pi", "epsilon",
+		"zeta", "eta", "theta",
+	}
+
+	for i, x := range words {
+		go printSomething(&wg, fmt.Sprintf("%d: %s", i, x))
+	}
+	time.Sleep(1 * time.Second)
+	printSomething(&wg, "Second msg")
+}
+
+// func main() {
+// 	var wg sync.WaitGroup
+
+// 	words := []string{
+// 		"alpha", "beta", "gamma",
+// 		"delta", "pi", "epsilon",
+// 		"zeta", "eta", "theta",
+// 	}
+// 	wg.Add(len(words))
+// 	for i, x := range words {
+// 		go printSomething(&wg, fmt.Sprintf("%d: %s", i, x))
+// 	}
+// 	wg.Wait()
+// 	wg.Add(1)
+// 	printSomething(&wg, "Second msg")
+// }
